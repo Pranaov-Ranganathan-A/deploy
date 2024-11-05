@@ -3,15 +3,19 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Load the data
-df = pd.read_csv("C://Users//apran//Desktop//Python_Diwali_Sales_Analysis//Diwali Sales Data.csv",encoding="ISO-8859-1")
+# Set Streamlit page config
+st.set_page_config(page_title="Diwali Sales Analysis", layout="wide")
+
+# Load the data with error handling
+try:
+    df = pd.read_csv("C://Users//apran//Desktop//Python_Diwali_Sales_Analysis//Diwali Sales Data.csv", encoding="ISO-8859-1")
+except FileNotFoundError:
+    st.error("File not found. Please check the file path.")
+    st.stop()
 
 # Data cleaning
 df.dropna(inplace=True)
 df['Amount'] = df['Amount'].astype(int)
-
-# Set Streamlit page config
-st.set_page_config(page_title="Diwali Sales Analysis", layout="wide")
 
 # Title
 st.title("Diwali Sales Data Analysis")
